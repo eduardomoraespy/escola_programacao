@@ -25,7 +25,7 @@ sys.path.append(
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -35,6 +35,11 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'escolar',
+    'usuarios'
+]
+
+INSTALLED_APPS += [
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +88,7 @@ DATABASES = {
 }
 
 #config para criar usuario personalizado
-#AUTH_USER_MODEL = "usuarios.Usuario"
+AUTH_USER_MODEL = "usuarios.Usuario"
 
 
 # Password validation
@@ -125,6 +130,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

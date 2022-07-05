@@ -48,15 +48,14 @@ class Aluno(models.Model):
         max_length=194
     )
 
-    # telefones = models.CharField(
-    #     verbose_name='Telefones',
-    #     max_length=11
-    # ) # deve permitir cadastrar mais de um telefone (criar tabela com telefones e relacionar com aluno)
 
     telefoneID = models.ForeignKey(
         Telefone,
         verbose_name='Telefone',
-        on_delete=models.PROTECT
+        db_column='telefoneID',
+        on_delete=models.PROTECT,
+        blank=False,
+        null=False
     )
 
 
@@ -147,6 +146,7 @@ class Professor(models.Model):
     telefoneID = models.ForeignKey(
         Telefone,
         verbose_name='Telefone',
+        db_column='telefoneID',
         on_delete=models.PROTECT
     )
 
@@ -183,6 +183,7 @@ class Curso(models.Model):
     professorID = models.ForeignKey(
         Professor,
         verbose_name='Professor',
+        db_column='professorID',
         on_delete=models.PROTECT
     )
 
@@ -202,12 +203,14 @@ class LkeDeslike(models.Model):
     cursoID = models.ForeignKey(
         Curso,
         verbose_name='Curso',
+        db_column='cursoID',
         on_delete=models.PROTECT
     )
 
     alunoID = models.ForeignKey(
         Aluno,
         verbose_name='Aluno',
+        db_column='alunoID',
         on_delete=models.PROTECT
     )
 
@@ -241,6 +244,7 @@ class Menu(models.Model):
     # usuarioID = models.ForeignKey(
     #     Usuario,
     #     verbose_name='usuario logado',
+    #     db_column='usuarioID',
     #     on_delete=models.PROTECT
     # )
 

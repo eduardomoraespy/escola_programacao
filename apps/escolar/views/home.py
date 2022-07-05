@@ -5,5 +5,13 @@ def home(request):
 
     return render(
         request,
-        'index.html'
+        'home.html'
+    )
+
+
+def form_base(request):
+
+    return render(
+        request,
+        'componentes/form_base.html'
     )

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase">{{ titulo }}</h5>
+        </div>
+        <div class="card-body">
+            
+        </div>
+    </div>
+</div>
+
+<!-- [ Hover-table ] start -->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                        </tr>
+                    </thead>
+                    {% for aluno in query_aluno %}
+                    <tbody>
+                        <tr>
+                            <td>{{aluno.nome}}</td>
+                            <td>{{aluno.sobrenome}}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Hover-table ] end -->
+{% endblock content %}
