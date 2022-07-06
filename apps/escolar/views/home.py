@@ -7,11 +7,3 @@ def home(request):
         request,
         'home.html'
     )
-
-
-def form_base(request):
-
-    return render(
-        request,
-        'componentes/form_base.html'
-    )

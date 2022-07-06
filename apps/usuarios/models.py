@@ -48,6 +48,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         unique=True
     )
 
+    password = models.CharField(max_length=255)
+
     # campos para modelo personalizado de usuários
     is_active = models.BooleanField(
         verbose_name='Usuário está ativo',

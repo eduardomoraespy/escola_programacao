@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5 class="text-uppercase">{{ titulo }}</h5>
+                </div>
+                <div class="col-sm-6">
+                    <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_usuario' %}">
+                        Novo Usuário
+                        <i class="feather icon-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            
+        </div>
+    </div>
+</div>
+
+<!-- [ Hover-table ] start -->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <!-- <th>tipo de usuário</th> -->
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    {% for usuario in query_usuario %}
+                    <tbody>
+                        <tr>
+                            <td>{{usuario.email}}</td>
+                            {% comment %}<td>{{usuario.is_staff}}</td>{% endcomment %}
+                            <td></td>
+                            <td class="text-rigth" style="width: 6rem">
+                                <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_usuario' usuario.id %}">
+                                    <i class="feather icon-file-text"></i>
+                                </a>
+                                <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_usuario' usuario.id %}">
+                                    <i class="feather icon-edit-2"></i>
+                                </a>
+                                <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_usuario' usuario.id %}">
+                                    <i class="feather icon-delete"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Hover-table ] end -->
+{% endblock content %}
