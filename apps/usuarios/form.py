@@ -1,7 +1,6 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import (HTML, Button, Div, Field, Layout,
-                                 Submit)
+from crispy_forms.layout import Layout, Div, Field, Button, Submit
 from django import forms
 
 from usuarios.models import Usuario
@@ -135,6 +134,14 @@ class EditaUsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ('email', 'password', 'is_active', 'is_staff', 'is_superuser',)
+        error_messages = {
+            'email':{
+                'required':'O E-mail é obrigatório para o registro'
+            },
+            'password':{
+                'required':'A senha é obrigatória para o registro'
+            },
+        }
 
 
 

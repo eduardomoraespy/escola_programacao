@@ -1,21 +1,5 @@
 from django.db import models
 
-class Telefone(models.Model):
-
-    telefone = models.CharField(
-        verbose_name='Telefone',
-        max_length=11
-    )
-
-    class Meta:
-        verbose_name = 'telefone'
-        verbose_name_plural = 'telefones'
-        db_table = 'telefone'
-    
-
-    def __str__(self):
-        return self.telefone
-
 
 class Aluno(models.Model):
 
@@ -46,16 +30,6 @@ class Aluno(models.Model):
     endereco = models.CharField(
         verbose_name='Endereço',
         max_length=194
-    )
-
-
-    telefoneID = models.ForeignKey(
-        Telefone,
-        verbose_name='Telefone',
-        db_column='telefoneID',
-        on_delete=models.PROTECT,
-        blank=False,
-        null=False
     )
 
 
@@ -120,7 +94,8 @@ class Professor(models.Model):
     )
 
     email = models.EmailField(
-        verbose_name='E-mail'
+        verbose_name='E-mail',
+        unique=True
     )
 
     estado = models.CharField(
@@ -138,17 +113,12 @@ class Professor(models.Model):
         max_length=194
     )
 
-    # telefones = models.CharField(
-    #     verbose_name='Telefones',
-    #     max_length=11
-    # ) # deve permitir cadastrar mais de um telefone (criar tabela com telefones e relacionar com aluno)
-
-    telefoneID = models.ForeignKey(
-        Telefone,
-        verbose_name='Telefone',
-        db_column='telefoneID',
-        on_delete=models.PROTECT
+    usuarioID = models.BigIntegerField(
+        db_column='usuarioID',
+        blank=True,
+        null=True
     )
+
 
 
     class Meta:
@@ -160,6 +130,29 @@ class Professor(models.Model):
     def __str__(self): 
         return self.nome
 
+
+class TelefoneProfessor(models.Model):
+
+    telefone = models.CharField(
+        verbose_name='Telefone',
+        max_length=11
+    )
+
+    professorID = models.ForeignKey(
+        Professor,
+        verbose_name='Professor',
+        db_column='professorID',
+        on_delete=models.PROTECT
+    )
+
+    class Meta:
+        verbose_name = 'telefone_professor'
+        verbose_name_plural = 'telefones_profeesores'
+        db_table = 'telefone_professor'
+    
+
+    def __str__(self):
+        return self.telefone
 
 class Curso(models.Model):
 

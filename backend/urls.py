@@ -1,5 +1,5 @@
 
-#from django.contrib import admin
+from django.contrib import admin
 from django.urls import path
 
 from apps.escolar.views.home import home
@@ -11,8 +11,12 @@ from apps.usuarios.views import (
     remove_usuario
 )
 
+from apps.escolar.views.professor import (
+    cadastro_professor
+)
+
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     path('', home, name='home'),
     
@@ -26,8 +30,12 @@ urlpatterns = [
     # Aluno 
     path('cadastro-aluno/', cadastro_aluno, name='cadastro_aluno'),
 
-    # # Professor 
-    # path('cadastro_professor/', cadastro_professor, name='cadastro_aluno'),
+    # Professor 
+    path('lista-professor/', lista_usuario, name='lista_professor'),
+    path('cadastro-professor/', cadastro_professor, name='cadastro_professor'),
+    path('detail-professor/<id>', detail_usuario, name='detail_professor'),
+    path('edita-professor/<id>', edita_usuario, name='edita_professor'),
+    path('remove-professor/<id>', remove_usuario, name='remove_professor'),
 
     # # Curso 
     # path('cadastro_curso/', cadastro_aluno, name='cadastro_aluno'),

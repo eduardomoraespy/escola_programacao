@@ -42,7 +42,6 @@ class CadastroAlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
         fields = ('__all__')
-        exclude = ('telefoneID',)
 
 
 

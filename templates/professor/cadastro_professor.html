@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase">{{ titulo }}</h5>
+        </div>
+        <div class="card-body" id="id_cad_body">
+            <p class="ml-1">
+                <span>
+                    O asterisco (*) indica que o campo é obrigatório.
+                </span>
+            </p>
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        {% for erro in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{erro}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+    
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="." method="POST">
+                {% csrf_token %}
+
+                {% crispy form %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // Obter valores
+    let telefone= document.querySelector('input#id_telefone');
+    let lista = document.querySelector('select#telefone_lista');
+    let res = document.querySelector('div#res');
+    let cad_body = document.querySelector('div#id_cad_body');
+    let valores = [];
+
+
+    function inLista(n, l){
+        if (l.indexOf(n) != -1){
+            return true
+        } else {
+            return false
+        }
+    };
+
+    function adicionar(){
+        cad_body.innerHTML = ''
+        if(telefone.value && !inLista(telefone.value, valores)){
+
+            cad_body.innerHTML += `
+            <div class="alert alert-success" role="alert">
+                Telefone adicionado a lista
+            </div>`
+
+            // adicionar valor no vetor
+            valores.push(telefone.value)
+
+            // adicionar option no select
+            let item = document.createElement('option')
+            item.text = `${telefone.value}`
+            item.value = `${telefone.value}`
+
+            // Adicionar na lista
+            lista.appendChild(item)
+            res.innerHTML = ''
+            telefone.value = ''
+
+        }else{
+            //window.alert('numero iválido ou já existente')
+            //new Error('numero iválido ou já existente');
+            
+            cad_body.innerHTML = ''
+            cad_body.innerHTML += `
+            <div class="alert alert-warning" role="alert">
+                Telefone já existente
+            </div>`
+        }
+
+        telefone.value = ''
+        telefone.focus()
+    };
+
+    // for (var option of lista.options) {
+    // //document.getElementById("container").append(option.value + ' ');
+    //     console.log(option.value)
+    // }
+
+</script>
+{% endblock content %}
