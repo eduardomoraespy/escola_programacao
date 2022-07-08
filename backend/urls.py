@@ -12,7 +12,8 @@ from apps.usuarios.views import (
 )
 
 from apps.escolar.views.professor import (
-    cadastro_professor
+    lista_professor, cadastro_professor, detail_professor,
+    edita_professor, remove_professor
 )
 
 urlpatterns = [
@@ -31,11 +32,11 @@ urlpatterns = [
     path('cadastro-aluno/', cadastro_aluno, name='cadastro_aluno'),
 
     # Professor 
-    path('lista-professor/', lista_usuario, name='lista_professor'),
+    path('lista-professor/', lista_professor, name='lista_professor'),
     path('cadastro-professor/', cadastro_professor, name='cadastro_professor'),
-    path('detail-professor/<id>', detail_usuario, name='detail_professor'),
-    path('edita-professor/<id>', edita_usuario, name='edita_professor'),
-    path('remove-professor/<id>', remove_usuario, name='remove_professor'),
+    path('detail-professor/<id>', detail_professor, name='detail_professor'),
+    path('edita-professor/<id>', edita_professor, name='edita_professor'),
+    path('remove-professor/<id>', remove_professor, name='remove_professor'),
 
     # # Curso 
     # path('cadastro_curso/', cadastro_aluno, name='cadastro_aluno'),

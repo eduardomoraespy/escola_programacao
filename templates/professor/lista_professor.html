@@ -10,8 +10,8 @@
                     <h5 class="text-uppercase">{{ titulo }}</h5>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_usuario' %}">
-                        Novo Usuário
+                    <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_professor' %}">
+                        Novo Professor
                         <i class="feather icon-user-plus"></i>
                     </a>
                 </div>
@@ -31,26 +31,26 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Usuario</th>
+                            <th>Nome</th>
                             <!-- <th>tipo de usuário</th> -->
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    {% for usuario in query_usuario %}
+                    {% for professor in query_professor %}
                     <tbody>
                         <tr>
-                            <td>{{usuario.email}}</td>
-                            {% comment %}<td>{{usuario.is_staff}}</td>{% endcomment %}
+                            <td>{{professor.nome}} {{professor.sobrenome}}</td>
+                            
                             <td></td>
                             <td class="text-rigth" style="width: 6rem">
-                                <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_usuario' usuario.id %}">
+                                <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_professor' professor.id %}">
                                     <i class="feather icon-file-text"></i>
                                 </a>
-                                <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_usuario' usuario.id %}">
+                                <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_professor' professor.id %}">
                                     <i class="feather icon-edit-2"></i>
                                 </a>
-                                <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_usuario' usuario.id %}">
+                                <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_professor' professor.id %}">
                                     <i class="feather icon-delete"></i>
                                 </a>
                             </td>

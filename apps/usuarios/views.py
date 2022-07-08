@@ -28,8 +28,8 @@ def cadastro_usuario(request):
         form = CadastroUsuarioForm(request.POST or None)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.password = make_password(instance.password)
-            #print(f'senha usuario --------------- {instance.password}')
+            #instance.password = make_password(instance.password)
+            print(f'senha usuario --------------- {instance.password}')
             instance.save()
 
             ## solução para impressão de mensagem de sucesso no front-end
@@ -78,7 +78,7 @@ def edita_usuario(request, id):
 
     if form.is_valid():
         instance = form.save(commit=False)
-        instance.password = make_password(instance.password)
+        #instance.password = make_password(instance.password)
         instance.save()
 
         messages.success(
