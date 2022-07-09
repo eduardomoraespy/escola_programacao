@@ -9,13 +9,16 @@ def lista_professor(request):
 
     titulo = 'Lista de Professores'
     query_professor = Professor.objects.all()
+    usuario_logado = 21#request.user
+    query_user_staff = Usuario.objects.get(id=usuario_logado)
 
     return render(
         request,
         'professor/lista_professor.html',
         {
             'titulo':titulo,
-            'query_professor':query_professor
+            'query_professor':query_professor,
+            'query_user_staff':query_user_staff
         }
     )
 
@@ -29,9 +32,6 @@ def cadastro_professor(request):
     query_user_staff = Usuario.objects.get(id=usuario_logado)
 
     if query_user_staff.is_staff:
-
-        print(f'--------------------- {usuario_logado} ------------------ {query_user_staff.is_staff}')
-
         if request.method == "POST":
             form = CadastroProfessorForm(request.POST or None)
             if form.is_valid():

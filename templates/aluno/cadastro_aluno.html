@@ -7,8 +7,26 @@
         <div class="card-header">
             <h5 class="text-uppercase">{{ titulo }}</h5>
         </div>
-        <div class="card-body">
-            
+        <div class="card-body" id="id_cad_body">
+            <p class="ml-1">
+                <span>
+                    O asterisco (*) indica que o campo é obrigatório.
+                </span>
+            </p>
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        {% for erro in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{erro}}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+    
         </div>
     </div>
 </div>
@@ -20,120 +38,11 @@
                 {% csrf_token %}
 
                 {% crispy form %}
-
-                <!-- <div class="col-sm-4">
-                    <div class="form-group">
-                        <label class="floating-label" for="label_telefone">Telefone</label>
-                        <input type="number" class="form-control" id="telefone">
-                        <input type="button" value="Adicionar Telefone" class="btn btn-primary has-ripple mt-5" onclick="">
-                        <br>
-                        <select name="telefone_lista" id="telefone_lista" size="6" style="width: 150px;" class="form-control mt-5">
-
-                        </select>
-                        <br>
-                        <input type="button" value="Salvar Telefone" class="btn btn-success has-ripple mt-5">
-                    </div>
-                </div>
-
-                <div id="res">
-
-                </div> -->
-
-                <div>
-                    <input type="number" name="fnum" id="fnum">
-                    <input type="button" value="Adicionar" onclick="adicionar()">
-                    <br><br> <select name="flista" id="flista" size="6" style="width: 150px;"></select>
-                    <br><input type="button" value="finalizar" onclick="finalizar()">
-                </div>
-
-                <div id="res">
-
-                </div>
             </form>
         </div>
     </div>
 </div>
 
-<script>
+<script src="{% static 'assets/js/adicionar_telefone.js' %}"></script>
 
-    // Obter valores
-    let num = document.querySelector('input#fnum');
-    let lista = document.querySelector('select#flista');
-    let res = document.querySelector('div#res');
-    let valores = [];
-
-    function isNumero(n){
-        if(Number(n) >= 1 && Number(n) <= 100){
-            return true
-        } else {
-            return false
-        }
-    }
-
-    function inLista(n, l){
-        if (l.indexOf(Number(n)) != -1){
-            return true
-        } else {
-            return false
-        }
-    };
-
-    function adicionar(){
-
-        if(isNumero(num.value) && !inLista(num.value, valores)){
-
-            // adicionar valor no vetor
-            valores.push(Number(num.value))
-
-            // adicionar option no select
-            let item = document.createElement('option')
-            item.text = `Valor ${num.value} Adicionado`
-
-            // Adicionar na lista
-            lista.appendChild(item)
-            res.innerHTML = ''
-
-        }else{
-            window.alert('numero iválido ou já existente')
-        }
-
-        num.value = ''
-        num.focus()
-    };
-
-    function finalizar(){
-        if (valores.length == 0){
-            window.alert('Adicione valores antes de finalizar')
-        } else {
-            let tot = valores.length
-            let maior = valores[0]
-            let menor = valores[0]
-            let soma = 0
-            let media = 0
-
-            for(let pos in valores){
-                soma += valores[pos]
-
-                if(valores[pos] > maior){
-                    maior = valores[pos]
-                }
-
-                if(valores[pos] < menor){
-                    menor = valores[pos]
-                }
-            }
-
-            media = soma/tot
-
-            res.innerHTML = ''
-            res.innerHTML += `<p>Ao todo, temos ${tot} números adicionador. </p>`
-            res.innerHTML += `<p>O maior valor informado foi ${maior}.  </p>`
-            res.innerHTML += `<p>O menor valor informado foi ${menor}.  </p>`
-            res.innerHTML += `<p>A soma dos valores é ${soma}.  </p>`
-            res.innerHTML += `<p>A media dos valores é ${media}.  </p>`
-        }
-    }
-
-
-</script>
 {% endblock content %}

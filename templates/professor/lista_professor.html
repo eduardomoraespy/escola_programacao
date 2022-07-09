@@ -9,12 +9,14 @@
                 <div class="col-sm-6">
                     <h5 class="text-uppercase">{{ titulo }}</h5>
                 </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_professor' %}">
-                        Novo Professor
-                        <i class="feather icon-user-plus"></i>
-                    </a>
-                </div>
+                {% if query_user_staff.is_staff %}
+                    <div class="col-sm-6">
+                        <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_professor' %}">
+                            Novo Professor
+                            <i class="feather icon-user-plus"></i>
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="card-body">
@@ -43,17 +45,19 @@
                             <td>{{professor.nome}} {{professor.sobrenome}}</td>
                             
                             <td></td>
-                            <td class="text-rigth" style="width: 6rem">
-                                <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_professor' professor.id %}">
-                                    <i class="feather icon-file-text"></i>
-                                </a>
-                                <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_professor' professor.id %}">
-                                    <i class="feather icon-edit-2"></i>
-                                </a>
-                                <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_professor' professor.id %}">
-                                    <i class="feather icon-delete"></i>
-                                </a>
-                            </td>
+                            {% if query_user_staff.is_staff %}
+                                <td class="text-rigth" style="width: 6rem">
+                                    <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_professor' professor.id %}">
+                                        <i class="feather icon-file-text"></i>
+                                    </a>
+                                    <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_professor' professor.id %}">
+                                        <i class="feather icon-edit-2"></i>
+                                    </a>
+                                    <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_professor' professor.id %}">
+                                        <i class="feather icon-delete"></i>
+                                    </a>
+                                </td>
+                            {% endif %}
                         </tr>
                     </tbody>
                     {% endfor %}

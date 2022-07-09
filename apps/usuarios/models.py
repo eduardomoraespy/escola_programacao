@@ -42,11 +42,11 @@ class UsuarioManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
 
-    nome_login = models.CharField(
-        max_length=255, 
-        blank=True, 
-        null=True
-    )
+    # nome_login = models.CharField(
+    #     max_length=255, 
+    #     blank=True, 
+    #     null=True
+    # )
 
     email = models.EmailField(
         verbose_name='Email do Usuário',

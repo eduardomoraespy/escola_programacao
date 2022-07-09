@@ -154,6 +154,30 @@ class TelefoneProfessor(models.Model):
     def __str__(self):
         return self.telefone
 
+
+class TelefoneAluno(models.Model):
+
+    telefone = models.CharField(
+        verbose_name='Telefone',
+        max_length=11
+    )
+
+    alunoID = models.ForeignKey(
+        Aluno,
+        verbose_name='aluno',
+        db_column='alunoID',
+        on_delete=models.PROTECT
+    )
+
+    class Meta:
+        verbose_name = 'telefone_aluno'
+        verbose_name_plural = 'telefones_alunos'
+        db_table = 'telefone_aluno'
+    
+
+    def __str__(self):
+        return self.telefone
+
 class Curso(models.Model):
 
     nome_curso = models.CharField(

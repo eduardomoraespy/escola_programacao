@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.urls import path
 
 from apps.escolar.views.home import home
-from apps.escolar.views.aluno import cadastro_aluno, lista_aluno
-#from apps.escolar.views.aluno import 
+from apps.escolar.views.menu import menu
 
 from apps.usuarios.views import (
     lista_usuario, cadastro_usuario, detail_usuario, edita_usuario,
@@ -16,10 +15,18 @@ from apps.escolar.views.professor import (
     edita_professor, remove_professor
 )
 
+from apps.escolar.views.aluno import (
+    lista_aluno, cadastro_aluno, detail_aluno, edita_aluno,
+    remove_aluno
+)
+
+from apps.usuarios.api_usuarios.user_logado import UsuarioLogadoViewSet
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', home, name='home'),
+    path('menu/', menu, name='menu'),
     
     # Usuário
     path('lista-usuario/', lista_usuario, name='lista_usuario'),
@@ -29,7 +36,11 @@ urlpatterns = [
     path('remove-usuario/<id>', remove_usuario, name='remove_usuario'),
 
     # Aluno 
+    path('lista-aluno/', lista_aluno, name='lista_aluno'),
     path('cadastro-aluno/', cadastro_aluno, name='cadastro_aluno'),
+    path('detail-aluno/<id>', detail_aluno, name='detail_aluno'),
+    path('edita-aluno/<id>', edita_aluno, name='edita_aluno'),
+    path('remove-aluno/<id>', remove_aluno, name='remove_aluno'),
 
     # Professor 
     path('lista-professor/', lista_professor, name='lista_professor'),
@@ -40,5 +51,11 @@ urlpatterns = [
 
     # # Curso 
     # path('cadastro_curso/', cadastro_aluno, name='cadastro_aluno'),
+
+
+    # ----------- API --------------
+
+    # Usuário
+    path('usuario-logado/', UsuarioLogadoViewSet.as_view(actions={"get": "get_usuario_logado"}),name="get_usuario_logado"),
 
 ]
