@@ -28,7 +28,7 @@ Banco de dados hospedado no heroku.
 
 Execução máquina local: python manage.py runserver
 
-Execução heroku: 'url'
+Execução heroku: ' https://escola-prog.herokuapp.com/'
 
 #### Acessos
 Usuário: Usuario_1
