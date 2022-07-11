@@ -8,7 +8,8 @@ $(document).ready(function(){
             type: "GET",
             headers: { "X-CSRFToken": crf_token },
             success: function (data) {
-                $('#more-details').append(`<span>${data[0].email}</span>`)
+                $('#more-details').append(`<span>${data[0].username}</span>`)
+                console.log(data.id)
             },
 
             failure: function (data) {

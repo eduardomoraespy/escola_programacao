@@ -21,7 +21,6 @@ sys.path.append(
     os.path.join(BASE_DIR, 'apps')
 )
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,7 +34,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'escolar',
-    'usuarios'
+    'accounts'
 ]
 
 INSTALLED_APPS += [
@@ -88,12 +87,10 @@ DATABASES = {
     }
 }
 
-#config para criar usuario personalizado
-AUTH_USER_MODEL = "usuarios.Usuario"
 
 # auth
 AUTHENTICATION_BACKENDS = [
-    "usuarios.authentication.EscolaAuthentication",
+    'accounts.backends.EmailOrUsernameBackend',
 ]
 
 
@@ -143,3 +140,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'user_login'
+LOGIN_REDIRECT_URL = 'home'

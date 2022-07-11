@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from escolar.models import *
-from usuarios.models import Usuario
+#from usuarios.models import Usuario
 from escolar.forms.professor import CadastroProfessorForm, DetailProfessorForm, EditaProfessorForm
 
 from django.contrib import messages
@@ -10,7 +10,7 @@ def lista_professor(request):
     titulo = 'Lista de Professores'
     query_professor = Professor.objects.all()
     usuario_logado = 21#request.user
-    query_user_staff = Usuario.objects.get(id=usuario_logado)
+    query_user_staff = True#Usuario.objects.get(id=usuario_logado)
 
     return render(
         request,

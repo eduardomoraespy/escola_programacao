@@ -2,22 +2,23 @@ from rest_framework import viewsets, status, permissions
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import JsonResponse
 from rest_framework.response import Response
-from usuarios.models import Usuario
-from usuarios.serializer import UsuarioSerializer
+from accounts.serializer import UsuarioSerializer
+
+from django.contrib.auth.models import User
 
 
 
 
 class UsuarioLogadoViewSet(viewsets.ModelViewSet):
-    queryset = Usuario.objects.all()
+    queryset = User.objects.all()
     serializer_class = UsuarioSerializer
     pagination_class = None
 
     def get_usuario_logado(self, request):
         try:
-            usuario_logado = 21#request.user
+            usuario_logado = request.user
 
-            resposta = Usuario.objects.filter(id=usuario_logado)
+            resposta = User.objects.filter(id=usuario_logado.id)
 
         except ObjectDoesNotExist as error:
             return JsonResponse(error, status=status.HTTP_410_GONE)

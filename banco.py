@@ -63,6 +63,8 @@ class AuthUser(models.Model):
     is_staff = models.BooleanField()
     is_active = models.BooleanField()
     date_joined = models.DateTimeField()
+    is_aluno = models.BooleanField(blank=True, null=True)
+    is_professor = models.BooleanField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -186,6 +188,16 @@ class Professor(models.Model):
         db_table = 'professor'
 
 
+class TelefoneAluno(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    telefone = models.CharField(max_length=11)
+    alunoid = models.ForeignKey(Aluno, models.DO_NOTHING, db_column='alunoID')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'telefone_aluno'
+
+
 class TelefoneProfessor(models.Model):
     id = models.BigAutoField(primary_key=True)
     telefone = models.CharField(max_length=11)
@@ -205,6 +217,8 @@ class Usuario(models.Model):
     is_staff = models.BooleanField()
     is_superuser = models.BooleanField()
     nome_login = models.CharField(max_length=255, blank=True, null=True)
+    is_professor = models.BooleanField(blank=True, null=True)
+    is_aluno = models.BooleanField(blank=True, null=True)
 
     class Meta:
         managed = False

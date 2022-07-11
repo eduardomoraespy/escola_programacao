@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="pt-br">
+
+<head>
+
+	<title>login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="">
+	<meta name="author" content="Phoenixcoded" />
+	<!-- Favicon icon -->
+	<link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+
+	<!-- vendor css -->
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	
+	
+
+
+</head>
+
+<!-- [ auth-signin ] start -->
+<div class="auth-wrapper">
+	<div class="auth-content">
+		<div class="card">
+			<div class="row align-items-center text-center">
+				<div class="col-md-12">
+					<div class="card-body">
+						<h5 class="text-primary mb-3">Escola Programação</h5>
+						<h4 class="mb-3 f-w-400">Login</h4>
+                        
+                        <form method="POST" action="{% url 'user_login' %}">
+                            {% csrf_token %}
+
+                            <input type="text" name="username" class="form-control" placeholder="Usuário">
+                            <br />
+                            <input type="password" name="password" class="form-control" placeholder="Senha">
+                            <br />
+                            
+                            <div class="one_half last">
+                                <button type="submit" class="btn btn-primary has-ripple">Entrar</button>
+                            </div>
+
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- [ auth-signin ] end -->
+
+<!-- Required Js -->
+<script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/ripple.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js'} "></script>
+
+
+
+</body>
+
+</html>

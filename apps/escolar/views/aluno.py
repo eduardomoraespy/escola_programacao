@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from escolar.models import *
-from usuarios.models import Usuario
+#from usuarios.models import Usuario
 from escolar.forms.aluno import CadastroAlunoForm, DetailAlunoForm, EditaAlunoForm
 
 from django.contrib import messages
@@ -26,7 +26,7 @@ def cadastro_aluno(request):
     usuario_logado = 21#request.user
 
     # Verifica se o User é staff
-    query_user_staff = Usuario.objects.get(id=usuario_logado)
+    query_user_staff = True#Usuario.objects.get(id=usuario_logado)
 
     if query_user_staff.is_staff:
         if request.method == "POST":
@@ -78,10 +78,10 @@ def edita_aluno(request, id):
     titulo = 'Editar Aluno'
     aluno_obj = get_object_or_404(Aluno, id=id)
     form = EditaAlunoForm(request.POST or None, instance=aluno_obj)
-    usuario_logado = 21#request.user
+    #usuario_logado = 21#request.user
 
     # Verifica se o User é staff
-    query_user_staff = Usuario.objects.get(id=usuario_logado)
+    query_user_staff = True#Usuario.objects.get(id=usuario_logado)
 
     if query_user_staff.is_staff:
         if form.is_valid():
