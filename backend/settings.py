@@ -3,6 +3,7 @@ import os
 import sys
 
 import django_on_heroku
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -148,4 +149,4 @@ LOGIN_URL = 'user_login'
 LOGIN_REDIRECT_URL = 'home'
 
 django_on_heroku.settings(locals())
-
+django_heroku.settings(locals())
