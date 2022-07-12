@@ -39,7 +39,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    {% for professor in query_professor %}
+                    {% for professor in page_obj %}
                     <tbody>
                         <tr>
                             <td>{{professor.nome}} {{professor.sobrenome}}</td>
@@ -62,6 +62,7 @@
                     </tbody>
                     {% endfor %}
                 </table>
+                {% include 'componentes/paginacao.html' %}
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    {% for usuario in query_usuario %}
+                    {% for usuario in page_obj %}
                     <tbody>
                         <tr>
                             <td>{{usuario.email}}</td>
@@ -50,14 +50,15 @@
                                 <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_usuario' usuario.id %}">
                                     <i class="feather icon-edit-2"></i>
                                 </a>
-                                <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_usuario' usuario.id %}">
+                                {% comment %}<a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_usuario' usuario.id %}">
                                     <i class="feather icon-delete"></i>
-                                </a>
+                                </a>{% endcomment %}
                             </td>
                         </tr>
                     </tbody>
                     {% endfor %}
                 </table>
+                {% include 'componentes/paginacao.html' %}
             </div>
         </div>
     </div>

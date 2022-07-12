@@ -1,16 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.core.paginator import Paginator
+
 from escolar.models import *
-#from usuarios.models import Usuario
+from django.contrib.auth.models import User
 from escolar.forms.professor import CadastroProfessorForm, DetailProfessorForm, EditaProfessorForm
 
-from django.contrib import messages
-
+@login_required
 def lista_professor(request):
 
     titulo = 'Lista de Professores'
     query_professor = Professor.objects.all()
-    usuario_logado = 21#request.user
-    query_user_staff = True#Usuario.objects.get(id=usuario_logado)
+    paginator = Paginator(query_professor, 5)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
+    usuario_logado = request.user
+    query_user_staff = User.objects.get(id=usuario_logado.id)
 
     return render(
         request,
@@ -18,18 +25,20 @@ def lista_professor(request):
         {
             'titulo':titulo,
             'query_professor':query_professor,
-            'query_user_staff':query_user_staff
+            'query_user_staff':query_user_staff,
+            'page_obj': page_obj
         }
     )
 
+@login_required
 def cadastro_professor(request):
 
     titulo = 'Cadastro de Professor'
     form = CadastroProfessorForm()
-    usuario_logado = 21#request.user
+    usuario_logado = request.user
 
     # Verifica se o User é staff
-    query_user_staff = Usuario.objects.get(id=usuario_logado)
+    query_user_staff = User.objects.get(id=usuario_logado.id)
 
     if query_user_staff.is_staff:
         if request.method == "POST":
@@ -61,6 +70,7 @@ def cadastro_professor(request):
         }
     )
 
+@login_required
 def detail_professor(request, id):
 
     titulo = 'Detalhes do Professor'
@@ -76,15 +86,16 @@ def detail_professor(request, id):
         }
     )
 
+@login_required
 def edita_professor(request, id):
 
     titulo = 'Editar Professor'
     professor_obj = get_object_or_404(Professor, id=id)
     form = EditaProfessorForm(request.POST or None, instance=professor_obj)
-    usuario_logado = 21#request.user
+    usuario_logado = request.user
 
     # Verifica se o User é staff
-    query_user_staff = Usuario.objects.get(id=usuario_logado)
+    query_user_staff = User.objects.get(id=usuario_logado.id)
 
     if query_user_staff.is_staff:
         if form.is_valid():
@@ -114,6 +125,7 @@ def edita_professor(request, id):
         }
     )
 
+@login_required
 def remove_professor(request, id):
     professor_obj = get_object_or_404(Professor, id=id)
 

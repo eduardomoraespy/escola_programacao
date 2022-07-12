@@ -33,44 +33,6 @@ class Aluno(models.Model):
     )
 
 
-    # # tratando campo vazio ou null
-    # def get_horario_saida(self):
-    #     if self.horario_saida:
-    #         return self.horario_saida
-        
-    #     return 'Horário de saída não registrado'
-
-    # def get_horario_autorizacao(self):
-    #     if self.horario_autorizacao:
-    #         return self.horario_autorizacao
-        
-    #     return 'Visitante aguardando autorização'
-    
-    # def get_morador_resposavel(self):
-    #     if self.morador_resposavel:
-    #         return self.morador_resposavel
-        
-    #     return 'Visitante aguardando autorização'
-    
-    # def get_placa_veiculo(self):
-    #     if self.placa_veiculo:
-    #         return self.placa_veiculo
-        
-    #     return 'Veículo não registrado'
-
-    # def get_cpf(self):
-    #     if self.cpf:
-    #         cpf = str(self.cpf)
-
-    #         cpf_parte_um = cpf[0:3]
-    #         cpf_parte_dois = cpf[3:6]
-    #         cpf_parte_tres = cpf[6:9]
-    #         cpf_parte_quatro = cpf[9:]
-
-    #         cpf_formatado = f'{cpf_parte_um}.{cpf_parte_dois}.{cpf_parte_tres}-{cpf_parte_quatro}'
-
-    #         return cpf_formatado
-
     class Meta:
         verbose_name = 'aluno'
         verbose_name_plural = 'alunos'
@@ -246,6 +208,35 @@ class LkeDeslike(models.Model):
         db_table = 'likedeslike'
 
 
+
+class TipoUsuario(models.Model):
+
+    tipo_usuario = models.CharField(
+        verbose_name='Tipo de Usuário',
+        max_length=194
+    )
+
+    is_professor = models.BooleanField(
+        default=False,
+    )
+
+    is_aluno = models.BooleanField(
+        default=False,
+    )
+
+    usuarioID =  models.IntegerField(
+        db_column='usuarioID',
+        default=0
+    )
+    class Meta:
+        verbose_name = 'tipo_usuario'
+        verbose_name_plural = 'tipos_usuarios'
+        db_table = 'tipo_usuario'
+    
+    def __str__(self):
+        return self.tipo_usuario
+
+
 class Menu(models.Model):
 
     nome_menu = models.CharField(
@@ -258,15 +249,34 @@ class Menu(models.Model):
         max_length=194
     )
 
-    # usuarioID = models.ForeignKey(
-    #     Usuario,
-    #     verbose_name='usuario logado',
-    #     db_column='usuarioID',
-    #     on_delete=models.PROTECT
-    # )
-
     class Meta:
         verbose_name = 'menu'
         verbose_name_plural = 'menus'
         db_table = 'menu'
+    
+    def __str__(self):
+        return self.nome_menu
 
+
+class AssociarMenuUsuario(models.Model):
+
+    tipo_usuarioID = models.ForeignKey(
+        TipoUsuario,
+        verbose_name='Tipo de usuário: Aluno/Professor',
+        db_column='tipo_usuarioID',
+        on_delete=models.PROTECT
+    )
+
+    opcao_menuID = models.ForeignKey(
+        Menu,
+        verbose_name='Opção visível no menu',
+        db_column='opcao_menuID',
+        on_delete=models.PROTECT
+    )
+
+    is_staff = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'associar_menu_usuario'
+        verbose_name_plural = 'associar_menu_usuarios'
+        db_table = 'associar_menu_usuario'

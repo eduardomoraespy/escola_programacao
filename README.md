@@ -31,7 +31,31 @@ Execução máquina local: python manage.py runserver
 Execução heroku: ' https://escola-prog.herokuapp.com/'
 
 #### Acessos
+Usuário staff
+
+
 Usuário: Usuario_1
 
 
 senha: 123
+
+
+Usuário professor
+
+
+Usuário: Usuario_professor
+
+
+senha: 123
+
+
+Usuário aluno
+
+
+Usuário: Usuario_aluno
+
+
+senha: 123
+
+
+

@@ -9,7 +9,7 @@
         <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
         <a href="#!" class="b-brand">
             <!-- ========   change your logo hear   ============ -->
-            <h5 class="text-white">Escola</h5><br>
+            <a href="{% url 'home' %}"><h5 class="text-white">Escola</h5></a>
             <img src="{% static 'assets/images/logo-icon.png' %}" alt="" class="logo-thumb">
         </a>
         <a href="#!" class="mob-toggler">
@@ -34,13 +34,13 @@
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
                     <div class="dropdown-menu dropdown-menu-right notification">
                         <div class="noti-head">
-                            <h6 class="d-inline-block m-b-0">Notifications</h6>
+                            <h6 class="d-inline-block m-b-0">Notificações</h6>
                             <div class="float-right">
-                                <a href="#!" class="m-r-10">mark as read</a>
-                                <a href="#!">clear all</a>
+                                <a href="#" class="m-r-10">marcar como lida</a>
+                                <a href="#">Limpar todas</a>
                             </div>
                         </div>
-                        <ul class="noti-body">
+                        {% comment %}<ul class="noti-body">
                             <li class="n-title">
                                 <p class="m-b-0">NEW</p>
                             </li>
@@ -84,6 +84,7 @@
                                 </div>
                             </li>
                         </ul>
+                        {% endcomment %}
                         <div class="noti-footer">
                             <a href="#!">show all</a>
                         </div>
@@ -97,17 +98,18 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius" alt="User-Profile-Image">
+                            <!-- <img src="assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image"> -->
                             <span>{{user.username}}</span>
                             <a href="{% url 'user_logout' %}" class="dud-logout" title="Logout">
                                 <i class="feather icon-log-out"></i>
                             </a>
                         </div>
-                        <!-- <ul class="pro-body">
-                            <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                        <ul class="pro-body">
+                            <!-- <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
                             <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-                            <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
-                        </ul> -->
+                            <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li> -->
+                            <li></li>
+                        </ul>
                     </div>
                 </div>
             </li>
