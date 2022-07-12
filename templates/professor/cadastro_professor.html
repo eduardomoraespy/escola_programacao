@@ -24,7 +24,16 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-            {% endif %}    
+            {% endif %}  
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
         </div>
     </div>
 </div>
@@ -42,11 +51,4 @@
 </div>
 
 <script src="{% static 'assets/js/adicionar_telefone.js' %}"></script>
-
-{% if messages %}
-    {% for message in messages %}
-        <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-    {% endfor %}
-{% endif %}
-
 {% endblock content %}

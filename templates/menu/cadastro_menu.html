@@ -7,7 +7,7 @@
         <div class="card-header">
             <h5 class="text-uppercase">{{ titulo }}</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" id="id_cad_body">
             <p class="ml-1">
                 <span>
                     O asterisco (*) indica que o campo é obrigatório.
@@ -24,8 +24,8 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-            {% endif %}
-
+            {% endif %}  
+            
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-success" role="alert">
@@ -33,7 +33,6 @@
                     </div>
                 {% endfor %}
             {% endif %}
-
         </div>
     </div>
 </div>
@@ -41,13 +40,13 @@
 <div class="col-sm-12">
     <div class="card">
         <div class="card-body">
-            <form action="{% url 'cadastro_usuario' %}" method="POST">
+            <form action="." method="POST">
                 {% csrf_token %}
 
                 {% crispy form %}
-
             </form>
         </div>
     </div>
 </div>
+
 {% endblock content %}

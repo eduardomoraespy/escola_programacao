@@ -5,14 +5,14 @@ from django.core.paginator import Paginator
 
 from escolar.models import *
 from django.contrib.auth.models import User
-from escolar.forms.cadastro_opcoes_menu import CadastroMenuForm, DetailMenuForm, EditaMenuForm
+from escolar.forms.associar_menu_usuario import AssociarMenuUsuario, DetailAssociarMenuUsuario, EditaAssociarMenuUsuario
 
 @login_required
-def lista_menu(request):
+def lista_menu_associar(request):
 
-    titulo = 'Lista Menu'
-    query_menu = Menu.objects.all()
-    paginator = Paginator(query_menu, 5)
+    titulo = 'Lista Menu Associado à um usuário'
+    query_menu_associado = AssociarMenuUsuario.objects.all()
+    paginator = Paginator(query_menu_associado, 5)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
 
@@ -23,10 +23,10 @@ def lista_menu(request):
     if query_superuser.is_superuser:
         return render(
             request,
-            'menu/lista_menu.html',
+            'menu_associar/lista_menu_associar.html',
             {
                 'titulo':titulo,
-                'query_menu':query_menu,
+                'query_menu':query_menu_associado,
                 'query_superuser':query_superuser,
                 'page_obj': page_obj
             }
@@ -40,37 +40,38 @@ def lista_menu(request):
         return redirect('home')
 
 @login_required
-def cadastro_menu(request):
+def cadastro_menu_associar(request):
 
-    titulo = 'Cadastro Menu'
-    form = CadastroMenuForm()
+    titulo = 'Associar Menu ao usário'
+    form = AssociarMenuUsuario()
     usuario_logado = request.user
     query_superuser = User.objects.get(id=usuario_logado.id)
 
     # Apenas superusuario pode cadastrar e gerênciar menu
     if query_superuser.is_superuser:
         if request.method == "POST":
-            form = CadastroMenuForm(request.POST or None)
+            form = AssociarMenuUsuario(request.POST or None)
             if form.is_valid():
                 instance = form.save(commit=False)
+                #instance.is_staff = usuario_logado.is_staff
                 instance.save()
 
                 messages.success(
                     request, 
-                    f'Menu: {instance.nome_menu} registrado com Sucesso'
+                    f'Menu: {instance.menuID} registrado com Sucesso'
                 )
 
-                return redirect('cadastro_menu')
+                return redirect('cadastro_menu_associar')
     else:
         messages.warning(
             request, 
-            f'Usuário não é permitido cadastrar Menu'
+            f'Usuário não é permitido associar Menu'
         )
         return redirect('home')
 
     return render(
         request,
-        'menu/cadastro_menu.html',
+        'menu_associar/cadastro_menu_associar.html',
         {
             'titulo':titulo,
             'form':form,
@@ -78,11 +79,11 @@ def cadastro_menu(request):
     )
 
 @login_required
-def detail_menu(request, id):
+def detail_menu_associar(request, id):
 
-    titulo = 'Detalhes do Menu'
-    menu_obj = get_object_or_404(Menu, id=id)
-    form = DetailMenuForm(instance=menu_obj)
+    titulo = 'Detalhes do Usuário associado ao menu'
+    menu_assocido_obj = get_object_or_404(AssociarMenuUsuario, id=id)
+    form = DetailAssociarMenuUsuario(instance=menu_assocido_obj)
     usuario_logado = request.user
     query_superuser = User.objects.get(id=usuario_logado.id)
 
@@ -90,7 +91,7 @@ def detail_menu(request, id):
     if query_superuser.is_superuser:
         return render(
             request,
-            'menu/detail_menu.html',
+            'menu_associar/detail_menu_associar.html',
             {
                 'titulo':titulo,
                 'form':form
@@ -104,11 +105,11 @@ def detail_menu(request, id):
         return redirect('home')
 
 @login_required
-def edita_menu(request, id):
+def edita_menu_associar(request, id):
 
-    titulo = 'Editar Menu'
-    menu_obj = get_object_or_404(Menu, id=id)
-    form = EditaMenuForm(request.POST or None, instance=menu_obj)
+    titulo = 'Editar menu Associado ao usuário'
+    menu_associado_obj = get_object_or_404(AssociarMenuUsuario, id=id)
+    form = EditaAssociarMenuUsuario(request.POST or None, instance=menu_associado_obj)
     usuario_logado = request.user
     query_superuser = User.objects.get(id=usuario_logado.id)
 
@@ -116,24 +117,25 @@ def edita_menu(request, id):
     if query_superuser.is_superuser:
         if form.is_valid():
             instance = form.save(commit=False)
+            instance.is_staff = query_superuser.is_staff
             instance.save()
 
             messages.success(
-                request, f'Menu: {instance.nome_menu} atualizado com Sucesso'
+                request, f'Associação: "{instance.menuID}" atualizado com Sucesso'
             )
 
-            return redirect('lista_menu')
+            return redirect('lista_menu_associar')
     else:
         messages.warning(
             request, 
-            f'Usuário não é permitido atualizar menu'
+            f'Usuário não é permitido atualizar associação ao menu'
         )
         return redirect('home')
     
 
     return render(
         request,
-        'menu/edita_menu.html',
+        'menu_associar/edita_menu_associar.html',
         {
             'titulo':titulo,
             'form':form,
@@ -141,18 +143,18 @@ def edita_menu(request, id):
     )
 
 @login_required
-def remove_menu(request, id):
-    menu_obj = get_object_or_404(Menu, id=id)
+def remove_menu_associar(request, id):
+    menu_associado_obj = get_object_or_404(AssociarMenuUsuario, id=id)
 
     try:
-        menu_obj.delete()
+        menu_associado_obj.delete()
 
         messages.success(
-            request, f'Menu: "{menu_obj.nome_menu}" removido com sucesso'
+            request, f'Menu: "{menu_associado_obj.menuID}" removido com sucesso'
         )
     except Exception as error:
         messages.error(
-            request, f'Menu: "{menu_obj.nome_menu}" não pode ser removido'
+            request, f'Menu: "{menu_associado_obj.menuID}" não pode ser removido'
         )
 
-    return redirect('lista_menu')
+    return redirect('lista_menu_associar')

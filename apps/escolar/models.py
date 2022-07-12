@@ -267,11 +267,12 @@ class AssociarMenuUsuario(models.Model):
         on_delete=models.PROTECT
     )
 
-    opcao_menuID = models.ForeignKey(
+    menuID = models.ForeignKey(
         Menu,
         verbose_name='Opção visível no menu',
-        db_column='opcao_menuID',
-        on_delete=models.PROTECT
+        db_column='menuID',
+        on_delete=models.PROTECT,
+        default=0
     )
 
     is_staff = models.BooleanField(default=False)
