@@ -65,12 +65,11 @@
         <!-- [ Main Content ] end -->
     </div>
 </div>
-    <script src="{% static 'assets/js/menu_usuario.js' %}"></script>
     <!-- Required Js -->
-    <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor-all.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/ripple.js' %}"></script>
-    <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+    <script src="{% static 'assets/js/pcoded.min.js' %}" type="text/javascript"></script>
 
 
 <!-- Apex Chart -->
@@ -123,46 +122,7 @@
         })
     </script>
 
-    <script>
-        $(document).ready(function(){
-
-            carrega_menu();
-
-            function carrega_menu(){ 
-                $.ajax({
-                    url: `menu-usuario/`,
-                    type: "GET",
-                    headers: { "X-CSRFToken": crf_token },
-                    success: function (data) {
-                        
-                        $('#more-details').append(`<span>${data[0].username}</span>`)
-                        console.log(data.id)
-                        $.each(data, function(index, value){
-
-                            let nome_menu = value.nome_menu
-                            let caminho = value.caminho
-
-                            console.log(caminho)
-                            console.log(window.location.host)
-
-                            $('#menu_interativo').append(
-                                `
-                                <li class="nav-item">
-                                    <a href="https://${window.location.host}/${caminho}" class="nav-link "><span class="pcoded-mtext">${nome_menu}</span></a>
-                                </li>
-                                `
-                            )
-                        })
-                    },
-
-                    failure: function (data) {
-
-                    },
-
-                });
-            }
-        })
-    </script>
+    <script src="{% static 'assets/js/menu_usuario.js' %}"></script>
 
 </body>
 
