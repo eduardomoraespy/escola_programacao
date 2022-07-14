@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 
 from escolar.models import *
 from django.contrib.auth.models import User
-from escolar.forms.associar_menu_usuario import AssociarMenuUsuario, DetailAssociarMenuUsuario, EditaAssociarMenuUsuario
+from escolar.forms.associar_menu_usuario import AssociarMenuForm, DetailAssociarMenuUsuarioForm, EditaAssociarMenuUsuarioForm
 
 @login_required
 def lista_menu_associar(request):
@@ -43,17 +43,18 @@ def lista_menu_associar(request):
 def cadastro_menu_associar(request):
 
     titulo = 'Associar Menu ao usário'
-    form = AssociarMenuUsuario()
+    form = AssociarMenuForm()
     usuario_logado = request.user
     query_superuser = User.objects.get(id=usuario_logado.id)
 
     # Apenas superusuario pode cadastrar e gerênciar menu
     if query_superuser.is_superuser:
         if request.method == "POST":
-            form = AssociarMenuUsuario(request.POST or None)
+            form = AssociarMenuForm(request.POST or None)
             if form.is_valid():
                 instance = form.save(commit=False)
-                #instance.is_staff = usuario_logado.is_staff
+                if query_superuser.is_staff:
+                    instance.is_staff = usuario_logado.is_staff
                 instance.save()
 
                 messages.success(
@@ -83,7 +84,7 @@ def detail_menu_associar(request, id):
 
     titulo = 'Detalhes do Usuário associado ao menu'
     menu_assocido_obj = get_object_or_404(AssociarMenuUsuario, id=id)
-    form = DetailAssociarMenuUsuario(instance=menu_assocido_obj)
+    form = DetailAssociarMenuUsuarioForm(instance=menu_assocido_obj)
     usuario_logado = request.user
     query_superuser = User.objects.get(id=usuario_logado.id)
 
@@ -109,7 +110,7 @@ def edita_menu_associar(request, id):
 
     titulo = 'Editar menu Associado ao usuário'
     menu_associado_obj = get_object_or_404(AssociarMenuUsuario, id=id)
-    form = EditaAssociarMenuUsuario(request.POST or None, instance=menu_associado_obj)
+    form = EditaAssociarMenuUsuarioForm(request.POST or None, instance=menu_associado_obj)
     usuario_logado = request.user
     query_superuser = User.objects.get(id=usuario_logado.id)
 
@@ -117,7 +118,8 @@ def edita_menu_associar(request, id):
     if query_superuser.is_superuser:
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.is_staff = query_superuser.is_staff
+            if query_superuser.is_staff:
+                instance.is_staff = usuario_logado.is_staff
             instance.save()
 
             messages.success(

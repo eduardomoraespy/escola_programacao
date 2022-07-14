@@ -16,15 +16,15 @@ class AssociarMenuForm(forms.ModelForm):
         #self.helper.label_class = 'floating-label'
         self.helper.layout = Layout(
             Div(
+                Div(Field('tipo_usuario', css_class="form-control form-control-sm"), css_class='col-md-6'),
                 Div(Field('menuID', css_class="form-control form-control-sm"), css_class='col-md-6'),
-                Div(Field('tipo_usuarioID', css_class="form-control form-control-sm"), css_class='col-md-6'),
                 css_class='row ml-3 mr-3'
             ),
             Div(
                 FormActions(
                         Div(
                             Button('cancel', 'Cancelar', css_class="btn btn-danger has-ripple mr-2",
-                            onclick='window.location.href="/lista-menu_associar/"'),
+                            onclick='window.location.href="/lista-menu-associar/"'),
                             Submit('save_changes', 'Salvar', css_class="btn btn-primary has-ripple"),
                             css_class='mt-3 float-right',    
                         )
@@ -34,22 +34,22 @@ class AssociarMenuForm(forms.ModelForm):
 
     class Meta:
         model = AssociarMenuUsuario
-        fields = ['menuID', 'tipo_usuarioID']
+        fields = ['menuID', 'tipo_usuario']
         error_messages = {
             'menuID':{
                 'required':'O campo nenu é obrigatório!'
             },
-            'tipo_usuarioID':{
+            'tipo_usuario':{
                 'required':'O campo tipo de usuário é obrigatório!'
             },
         }
 
 
-class DetailAssociarMenuUsuario(forms.ModelForm):
+class DetailAssociarMenuUsuarioForm(forms.ModelForm):
 
 
     def __init__(self, *args, **kwargs):
-        super(DetailAssociarMenuUsuario, self).__init__(*args, **kwargs)
+        super(DetailAssociarMenuUsuarioForm, self).__init__(*args, **kwargs)
 
 
         self.helper = FormHelper()
@@ -57,8 +57,8 @@ class DetailAssociarMenuUsuario(forms.ModelForm):
         #self.helper.label_class = 'floating-label'
         self.helper.layout = Layout(
             Div(
+                Div(Field('tipo_usuario', css_class="form-control form-control-sm"), css_class='col-md-6'),
                 Div(Field('menuID', css_class="form-control form-control-sm"), css_class='col-md-6'),
-                Div(Field('tipo_usuarioID', css_class="form-control form-control-sm"), css_class='col-md-6'),
                 css_class='row ml-3 mr-3'
             ),
             Div(
@@ -73,28 +73,28 @@ class DetailAssociarMenuUsuario(forms.ModelForm):
 
     class Meta:
         model = AssociarMenuUsuario
-        fields = ['menuID', 'tipo_usuarioID']
+        fields = ['menuID', 'tipo_usuario']
 
 
-class EditaAssociarMenuUsuario(forms.ModelForm):
+class EditaAssociarMenuUsuarioForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(EditaAssociarMenuUsuario, self).__init__(*args, **kwargs)
+        super(EditaAssociarMenuUsuarioForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-group'
         #self.helper.label_class = 'floating-label'
         self.helper.layout = Layout(
             Div(
+                Div(Field('tipo_usuario', css_class="form-control form-control-sm"), css_class='col-md-6'),
                 Div(Field('menuID', css_class="form-control form-control-sm"), css_class='col-md-6'),
-                Div(Field('tipo_usuarioID', css_class="form-control form-control-sm"), css_class='col-md-6'),
                 css_class='row ml-3 mr-3'
             ),
             Div(
                 FormActions(
                         Div(
                             Button('cancel', 'Cancelar', css_class="btn btn-danger has-ripple mr-2",
-                            onclick='window.location.href="/lista-menu/"'),
+                            onclick='window.location.href="/lista-menu-associar/"'),
                             Submit('save_changes', 'Salvar', css_class="btn btn-primary has-ripple"),
                             css_class='mt-3 float-right',    
                         )
@@ -104,12 +104,12 @@ class EditaAssociarMenuUsuario(forms.ModelForm):
 
     class Meta:
         model = AssociarMenuUsuario
-        fields = ['menuID', 'tipo_usuarioID']
+        fields = ['menuID', 'tipo_usuario']
         error_messages = {
             'menuID':{
                 'required':'O campo nenu é obrigatório!'
             },
-            'tipo_usuarioID':{
+            'tipo_usuario':{
                 'required':'O campo tipo de usuário é obrigatório!'
             },
         }

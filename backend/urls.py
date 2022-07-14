@@ -66,4 +66,7 @@ urlpatterns = [
     # Usuário
     path('usuario-logado/', UsuarioLogadoViewSet.as_view(actions={"get": "get_usuario_logado"}),name="get_usuario_logado"),
 
+    # Menu
+    path('menu-usuario/', MenuUsuarioViewSet.as_view(actions={"get": "get_menu_usuario"}),name="get_menu_usuario"),
+
 ]

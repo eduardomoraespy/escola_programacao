@@ -20,41 +20,19 @@
                 </div>
             </div>
             
-            <ul class="nav pcoded-inner-navbar ">
+            <ul class="nav pcoded-inner-navbar" id="menu_interativo">
                 <li class="nav-item">
                     <a href="{% url 'home' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Inicío</span></a>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Escolar</label>
                 </li>
-                <li class="nav-item">
-                    <a href="{% url 'lista_professor' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Professor</span></a>
-                </li>
-                <!-- <li class="nav-item pcoded-hasmenu">
-                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page layouts</span></a>
-                    <ul class="pcoded-submenu">
-                        <li><a href="layout-vertical.html" target="_blank">Vertical</a></li>
-                        <li><a href="layout-horizontal.html" target="_blank">Horizontal</a></li>
-                    </ul>
-                </li> -->
-                <li class="nav-item">
-                    <a href="{% url 'lista_aluno' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Aluno</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Curso</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{% url 'cadastro_usuario' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Cadastro Usuário</span></a>
-                </li>
-                
-
             </ul>
-            
         </div>
     </div>
 </nav>
 <!-- [ navigation menu ] end -->
+
+
 
 {% endblock menu %}

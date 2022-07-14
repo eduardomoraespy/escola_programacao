@@ -1,3 +1,4 @@
+from random import choices
 from django.db import models
 
 
@@ -225,12 +226,12 @@ class TipoUsuario(models.Model):
     )
 
     usuarioID =  models.IntegerField(
-        db_column='usuarioID',
+        db_column='usuario_id',
         default=0
     )
     class Meta:
         verbose_name = 'tipo_usuario'
-        verbose_name_plural = 'tipos_usuarios'
+        verbose_name_plural = 'tipo_usuarios'
         db_table = 'tipo_usuario'
     
     def __str__(self):
@@ -260,17 +261,23 @@ class Menu(models.Model):
 
 class AssociarMenuUsuario(models.Model):
 
-    tipo_usuarioID = models.ForeignKey(
-        TipoUsuario,
+    TIPO_USUARIO_CHOICES = (
+        ('Professor', 'Professor'),
+        ('Aluno', 'Aluno')
+    )
+
+    tipo_usuario = models.CharField(
         verbose_name='Tipo de usuário: Aluno/Professor',
-        db_column='tipo_usuarioID',
-        on_delete=models.PROTECT
+        max_length=194,
+        db_column='tipo_usuario',
+        choices=TIPO_USUARIO_CHOICES,
+        default=''
     )
 
     menuID = models.ForeignKey(
         Menu,
         verbose_name='Opção visível no menu',
-        db_column='menuID',
+        db_column='menu_id',
         on_delete=models.PROTECT,
         default=0
     )
@@ -281,3 +288,16 @@ class AssociarMenuUsuario(models.Model):
         verbose_name = 'associar_menu_usuario'
         verbose_name_plural = 'associar_menu_usuarios'
         db_table = 'associar_menu_usuario'
+
+
+class VwMenuUsuario(models.Model):
+    tipo_usuario = models.BigAutoField(primary_key=True)
+    usuario_id = models.IntegerField(blank=True, null=True)
+    menu_id = models.BigIntegerField(blank=True, null=True)
+    id = models.BigIntegerField(blank=True, null=True)
+    caminho = models.CharField(max_length=194, blank=True, null=True)
+    nome_menu = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'vw_menu_usuario'

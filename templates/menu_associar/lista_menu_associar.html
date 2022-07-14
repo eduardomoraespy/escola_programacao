@@ -44,26 +44,25 @@
                     <thead>
                         <tr>
                             <th>Opcão no menu</th>
-                            <th>Usuário Associado</th>
-                            <th></th>
+                            <th>Tipo de Usuário</th>
                             <th></th>
                         </tr>
                     </thead>
                     {% for menu in page_obj %}
                     <tbody>
                         <tr>
-                            <td>{{menu.nome_menu}}</td>
+                            <td>{{menu.menuID.nome_menu}}</td>
                             
-                            <td></td>
+                            <td>{{menu.tipo_usuario}}</td>
                             {% if query_superuser.is_superuser %}
                                 <td class="text-rigth" style="width: 6rem">
-                                    <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_menu' menu.id %}">
+                                    <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_menu_associar' menu.id %}">
                                         <i class="feather icon-file-text"></i>
                                     </a>
-                                    <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_menu' menu.id %}">
+                                    <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_menu_associar' menu.id %}">
                                         <i class="feather icon-edit-2"></i>
                                     </a>
-                                    <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_menu' menu.id %}">
+                                    <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_menu_associar' menu.id %}">
                                         <i class="feather icon-delete"></i>
                                     </a>
                                 </td>
