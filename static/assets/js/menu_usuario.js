@@ -16,6 +16,9 @@ $(document).ready(function(){
                     let nome_menu = value.nome_menu
                     let caminho = value.caminho
 
+                    console.log(caminho)
+                    console.log(window.location.host)
+
                     $('#menu_interativo').append(
                         `
                         <li class="nav-item">
