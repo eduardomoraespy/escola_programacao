@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-y9t=xe-p$vyjw!i1uq-1swz6^j98s#uh_$eu86iqt6_ww%2lzc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'https://escola-prog.herokuapp.com/']
 
 sys.path.append(
     os.path.join(BASE_DIR, 'apps')
