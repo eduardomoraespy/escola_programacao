@@ -19,7 +19,7 @@ $(document).ready(function(){
                     $('#menu_interativo').append(
                         `
                         <li class="nav-item">
-                            <a href="http://${window.location.host}/${caminho}" class="nav-link "><span class="pcoded-mtext">${nome_menu}</span></a>
+                            <a href="https://${window.location.host}/${caminho}" class="nav-link "><span class="pcoded-mtext">${nome_menu}</span></a>
                         </li>
                         `
                     )
