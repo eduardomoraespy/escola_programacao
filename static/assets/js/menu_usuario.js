@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     function carrega_menu(){ 
         $.ajax({
-            url: `menu-usuario/`,
+            url: `https://escola-prog.herokuapp.com/menu-usuario/`,
             type: "GET",
             headers: { "X-CSRFToken": crf_token },
             success: function (data) {
