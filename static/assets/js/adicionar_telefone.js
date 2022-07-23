@@ -50,8 +50,3 @@ function adicionar(){
     telefone.value = ''
     telefone.focus()
 };
-
-for (var option of lista.options) {
-//document.getElementById("container").append(option.value + ' ');
-    console.log(option.value)
-}

@@ -7,10 +7,12 @@ from apps.escolar.views.home import *
 from apps.accounts.views import *
 from apps.escolar.views.professor import *
 from apps.escolar.views.aluno import *
+from apps.escolar.views.curso import *
 from apps.escolar.views.cadastro_opcoes_menu import *
 from apps.escolar.views.associar_menu_usuario import *
 
 from apps.accounts.api_accounts.usuario_logado import UsuarioLogadoViewSet
+from apps.escolar.api_escolar.aluno import AlunoViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,7 +46,12 @@ urlpatterns = [
     path('remove-professor/<id>', remove_professor, name='remove_professor'),
 
     # # Curso 
-    # path('cadastro-curso/', cadastro_curso, name='cadastro_curso'),
+    path('lista-curso/', lista_curso, name='lista_curso'),
+    path('cadastro-curso/', cadastro_curso, name='cadastro_curso'),
+    path('detail-curso/<id>', detail_curso, name='detail_curso'),
+    path('edita-curso/<id>', edita_curso, name='edita_curso'),
+    path('remove-curso/<id>', remove_curso, name='remove_curso'),
+    path('matricula-curso/<id_curso>', cadastro_matricula_curso, name='cadastro_matricula_curso'),
 
     # Menu
     path('lista-menu/', lista_menu, name='lista_menu'),
@@ -68,5 +75,8 @@ urlpatterns = [
 
     # Menu
     path('menu-usuario/', MenuUsuarioViewSet.as_view(actions={"get": "get_menu_usuario"}),name="get_menu_usuario"),
+
+    # Aluno
+    path('aluno-consulta/', AlunoViewSet.as_view(actions={"get": "get_consulta_aluno"}),name="get_consulta_aluno"),
 
 ]

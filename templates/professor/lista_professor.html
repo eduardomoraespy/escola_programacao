@@ -36,7 +36,14 @@
     <div class="card">
         <div class="card-body table-border-style">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="pesquisa_input" placeholder="Pesquisar" onkeyup="myFunction()">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover" id="id_tabela">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -74,4 +81,5 @@
     </div>
 </div>
 <!-- [ Hover-table ] end -->
+<script src="{% static 'assets/js/pesquisa_lista.js' %}"></script>
 {% endblock content %}

@@ -100,7 +100,7 @@ def edita_professor(request, id):
     if query_user_staff.is_staff:
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.usuarioID = usuario_logado
+            instance.usuarioID = usuario_logado.id
             instance.save()
 
             messages.success(

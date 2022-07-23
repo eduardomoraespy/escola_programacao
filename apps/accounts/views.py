@@ -65,7 +65,7 @@ def cadastro_usuario(request):
             except:
                 pass
 
-            messages.success(request, 'Usuário cadastrado com sucesso.')
+            messages.success(request, f'Usuário "{instance.first_name}" cadastrado com sucesso.')
 
             return redirect('cadastro_usuario')
     

@@ -9,30 +9,56 @@ from django.contrib.auth.models import User
 
 class CadastroUsuarioForm(forms.ModelForm):
 
-    password = forms.CharField(
-        label='Senha',
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                'type': 'password'
-            }
-        )
-    )
+    # password = forms.CharField(
+    #     label='Senha',
+    #     required=True,
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'type': 'password'
+    #         }
+    #     )
+    # )
 
-    is_professor = forms.BooleanField(
-        label='É professor',
-        required=False,
-        widget=forms.CheckboxInput()
-    )
+    # is_professor = forms.BooleanField(
+    #     label='É professor',
+    #     required=False,
+    #     widget=forms.CheckboxInput()
+    # )
 
-    is_aluno = forms.BooleanField(
-        label='É aluno',
-        required=False,
-        widget=forms.CheckboxInput()
-    )
+    # is_aluno = forms.BooleanField(
+    #     label='É aluno',
+    #     required=False,
+    #     widget=forms.CheckboxInput()
+    # )
 
     def __init__(self, *args, **kwargs):
         super(CadastroUsuarioForm, self).__init__(*args, **kwargs)
+
+        self.fields['password'] = forms.CharField(
+            label='Senha',
+            required=True,
+            widget=forms.TextInput(
+                attrs={
+                    'type': 'password'
+                }
+            )
+        )
+
+        self.fields['is_professor'] = forms.BooleanField(
+            label='É professor',
+            required=False,
+            widget=forms.CheckboxInput()
+        )
+
+        self.fields['is_aluno'] = forms.BooleanField(
+            label='É aluno',
+            required=False,
+            widget=forms.CheckboxInput()
+        )
+        
+        self.fields['last_name'].label = 'Sobrenome'
+        
+        self.fields['is_staff'].label = 'Usuário é staff?'
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-group'

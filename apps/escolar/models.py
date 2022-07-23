@@ -1,5 +1,5 @@
-from random import choices
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Aluno(models.Model):
@@ -167,6 +167,13 @@ class Curso(models.Model):
         on_delete=models.PROTECT
     )
 
+    usuario_id = models.ForeignKey(
+        User,
+        models.DO_NOTHING,
+        verbose_name='Usuário',
+        db_column='usuario_id',
+    )
+
 
     class Meta:
         verbose_name = 'curso'
@@ -301,3 +308,23 @@ class VwMenuUsuario(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'vw_menu_usuario'
+
+
+class MatriculaCurso(models.Model):
+    curso_id = models.ForeignKey(
+        Curso, 
+        models.DO_NOTHING,
+        verbose_name='Curso',
+        db_column='usuario_id',
+    )
+
+    aluno_id = models.ForeignKey(
+        Aluno, 
+        models.DO_NOTHING,
+        verbose_name='Aluno',
+        db_column='aluno_id',
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'matricula_curso'

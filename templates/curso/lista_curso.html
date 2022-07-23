@@ -9,21 +9,12 @@
                 <div class="col-sm-6">
                     <h5 class="text-uppercase">{{ titulo }}</h5>
                 </div>
-                {% if query_superuser.is_superuser %}
+                {% if query_user_staff.is_staff %}
                     <div class="col-sm-6">
-
-                        <div class="row float-right">
-
-                            <a class="btn btn-info has-ripple mr-3" href="{% url 'cadastro_menu_associar' %}">
-                                Associar Menu ao usuário
-                                <i class="feather icon-menu"></i>
-                            </a>
-
-                            <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_menu' %}">
-                                Cadastrar Menu
-                                <i class="feather icon-user-plus"></i>
-                            </a>
-                        </div>
+                        <a class="btn btn-success has-ripple float-right" href="{% url 'cadastro_curso' %}">
+                            Novo Curso
+                            <i class="feather icon-user-plus"></i>
+                        </a>
                     </div>
                 {% endif %}
             </div>
@@ -55,27 +46,30 @@
                 <table class="table table-hover" id="id_tabela">
                     <thead>
                         <tr>
-                            <th>Nome da Opcão no menu</th>
+                            <th>Curso</th>
                             <!-- <th>tipo de usuário</th> -->
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
-                    {% for menu in page_obj %}
+                    {% for curso in page_obj %}
                     <tbody>
                         <tr>
-                            <td>{{menu.nome_menu}}</td>
+                            <td>{{curso.nome_curso}}</td>
                             
                             <td></td>
-                            {% if query_superuser.is_superuser %}
+                            {% if query_user_staff.is_staff %}
                                 <td class="text-rigth" style="width: 6rem">
-                                    <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_menu' menu.id %}">
+                                    <a class="btn btn-icon btn-primary has-ripple mr-2" href="{% url 'cadastro_matricula_curso' curso.id %}">
+                                        <i class="feather icon-tv"></i>
+                                    </a>
+                                    <a class="btn btn-icon btn-warning has-ripple mr-2" href="{% url 'detail_curso' curso.id %}">
                                         <i class="feather icon-file-text"></i>
                                     </a>
-                                    <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_menu' menu.id %}">
+                                    <a class="btn btn-icon btn-success has-ripple mr-2" href="{% url 'edita_curso' curso.id %}">
                                         <i class="feather icon-edit-2"></i>
                                     </a>
-                                    <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_menu' menu.id %}">
+                                    <a class="btn btn-icon btn-danger has-ripple" href="{% url 'remove_curso' curso.id %}">
                                         <i class="feather icon-delete"></i>
                                     </a>
                                 </td>

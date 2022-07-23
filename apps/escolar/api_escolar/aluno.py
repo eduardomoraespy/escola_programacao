@@ -2,26 +2,24 @@ from rest_framework import viewsets, status, permissions
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import JsonResponse
 from rest_framework.response import Response
-from accounts.serializer import UsuarioSerializer
+from escolar.serializer import AlunosSerializer
+from escolar.models import Aluno
 
-from django.contrib.auth.models import User
 
-
-class UsuarioLogadoViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UsuarioSerializer
+class AlunoViewSet(viewsets.ModelViewSet):
+    queryset = Aluno.objects.all()
+    serializer_class = AlunosSerializer
     pagination_class = None
 
-    def get_usuario_logado(self, request):
+    def get_consulta_aluno(self, request):
         try:
-            usuario_logado = request.user
 
-            resposta = User.objects.filter(id=usuario_logado.id)
+            resposta = Aluno.objects.all().order_by('nome')
 
         except ObjectDoesNotExist as error:
             return JsonResponse(error, status=status.HTTP_410_GONE)
 
-        serializer = UsuarioSerializer(resposta, many=True,context={'request': request})
+        serializer = AlunosSerializer(resposta, many=True,context={'request': request})
 
         #print(serializer.data)
 
